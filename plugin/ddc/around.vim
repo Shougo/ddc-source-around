@@ -5,7 +5,7 @@ if exists('g:loaded_ddc_' . s:name)
 endif
 let g:loaded_ddc_{s:name} = 1
 
-call ddc#register_source({
+silent! call ddc#register_source({
       \ 'name': s:name,
       \ 'path': printf('%s/denops/ddc/sources/%s.ts',
       \                fnamemodify(expand('<sfile>'), ':h:h:h'), s:name),
