@@ -5,12 +5,12 @@ import {
   DdcOptions,
   Denops,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.0.5/types.ts";
+} from "https://deno.land/x/ddc_vim@v0.0.6/types.ts";
 import {
   assertEquals,
   batch,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.0.5/deps.ts";
+} from "https://deno.land/x/ddc_vim@v0.0.6/deps.ts";
 import { imap, range } from "https://deno.land/x/itertools@v0.1.2/mod.ts";
 
 function splitPages(
@@ -40,6 +40,7 @@ export class Source extends BaseSource {
     _ddcOptions: DdcOptions,
     _sourceOptions: SourceOptions,
     sourceParams: Record<string, unknown>,
+    completeStr: string,
   ): Promise<Candidate[]> {
     const pageSize = 500;
     const p = sourceParams as unknown as Params;
@@ -56,7 +57,10 @@ export class Source extends BaseSource {
       }
     }) as string[][];
     const cs: Candidate[] = [
-      ...new Set(allWords(ps.flatMap((p) => p)).map((word) => ({ word }))),
+      ...new Set(
+        allWords(ps.flatMap((p) => p)).filter((word) => word != completeStr)
+          .map((word) => ({ word })),
+      ),
     ];
     return cs;
   }
