@@ -26,7 +26,7 @@ function splitPages(
 
 function allWords(lines: string[]): string[] {
   return lines.flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
-    .map((match) => match[0]);
+    .map((match) => match[0]).filter((e, i, self) => self.indexOf(e) === i);
 }
 
 type Params = {
