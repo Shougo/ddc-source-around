@@ -56,12 +56,10 @@ export class Source extends BaseSource {
         fn.getline(helper, s, e);
       }
     }) as string[][];
-    const cs: Candidate[] = [
-      ...new Set(
-        allWords(ps.flatMap((p) => p)).filter((word) => word != completeStr)
-          .map((word) => ({ word })),
-      ),
-    ];
+    const cs: Candidate[] = allWords(ps.flatMap((p) => p)).filter((word) =>
+      word != completeStr
+    )
+      .map((word) => ({ word }));
     return cs;
   }
 
