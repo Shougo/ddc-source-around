@@ -2,18 +2,17 @@
 
 Around completion for ddc.vim
 
-This source collects candidates around the cursor, namely inside current
-buffer.
-
+This source collects candidates around the cursor, namely inside current buffer.
 
 ## Required
 
 ### denops.vim
+
 https://github.com/vim-denops/denops.vim
 
 ### ddc.vim
-https://github.com/Shougo/ddc.vim
 
+https://github.com/Shougo/ddc.vim
 
 ## Configuration
 
@@ -30,9 +29,7 @@ call ddc#custom#patch_global('sourceParams', {
       \ })
 ```
 
-
 ## Params
 
 - `maxSize`: Fixed range of looking for words 20 lines above and below your
-  cursor position.
-  Default: `200`
+  cursor position. Default: `200`

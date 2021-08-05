@@ -11,18 +11,6 @@ import {
   Denops,
   fn,
 } from "https://deno.land/x/ddc_vim@v0.0.9/deps.ts";
-import { imap, range } from "https://deno.land/x/itertools@v0.1.2/mod.ts";
-
-function splitPages(
-  minLines: number,
-  maxLines: number,
-  size: number,
-): Iterable<[number, number]> {
-  return imap(
-    range(minLines, /* < */ maxLines + 1, size),
-    (lnum: number) => [lnum, /* <= */ lnum + size - 1],
-  );
-}
 
 function allWords(lines: string[]): string[] {
   return lines.flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
@@ -42,7 +30,6 @@ export class Source extends BaseSource {
     sourceParams: Record<string, unknown>,
     completeStr: string,
   ): Promise<Candidate[]> {
-    const pageSize = 500;
     const p = sourceParams as unknown as Params;
     const maxSize = p.maxSize;
     const currentLine = await fn.line(denops, ".");
@@ -51,14 +38,9 @@ export class Source extends BaseSource {
       await fn.line(denops, "$"),
       currentLine + maxSize,
     );
-    const ps = await batch(denops, (helper) => {
-      for (const [s, e] of splitPages(minLines, maxLines, pageSize)) {
-        fn.getline(helper, s, e);
-      }
-    }) as string[][];
-    const cs: Candidate[] = allWords(ps.flatMap((p) => p)).filter((word) =>
-      word != completeStr
-    )
+    const cs: Candidate[] = allWords(
+      await fn.getline(denops, minLines, maxLines),
+    ).filter((word) => word != completeStr)
       .map((word) => ({ word }));
     return cs;
   }
