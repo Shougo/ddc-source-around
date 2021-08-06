@@ -4,13 +4,13 @@ import {
   Context,
   DdcOptions,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.0.9/types.ts";
+} from "https://deno.land/x/ddc_vim@v0.0.10/types.ts#^";
 import {
   assertEquals,
   batch,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.0.9/deps.ts";
+} from "https://deno.land/x/ddc_vim@v0.0.10/deps.ts#^";
 
 function allWords(lines: string[]): string[] {
   return lines.flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
