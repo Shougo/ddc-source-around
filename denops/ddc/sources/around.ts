@@ -1,16 +1,12 @@
 import {
   BaseSource,
   Candidate,
-  Context,
-  DdcOptions,
-  SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.0.13/types.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.2.1/types.ts#^";
 import {
   assertEquals,
-  batch,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.0.13/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.2.1/deps.ts#^";
 
 function allWords(lines: string[]): string[] {
   return lines.flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
@@ -22,26 +18,22 @@ type Params = {
 };
 
 export class Source extends BaseSource {
-  async gatherCandidates(
+  async gatherCandidates(args: {
     denops: Denops,
-    _context: Context,
-    _ddcOptions: DdcOptions,
-    _sourceOptions: SourceOptions,
     sourceParams: Record<string, unknown>,
     completeStr: string,
-  ): Promise<Candidate[]> {
-    const p = sourceParams as unknown as Params;
+  }): Promise<Candidate[]> {
+    const p = args.sourceParams as unknown as Params;
     const maxSize = p.maxSize;
-    const currentLine = await fn.line(denops, ".");
+    const currentLine = await fn.line(args.denops, ".");
     const minLines = Math.max(1, currentLine - maxSize);
     const maxLines = Math.min(
-      await fn.line(denops, "$"),
+      await fn.line(args.denops, "$"),
       currentLine + maxSize,
     );
     const cs: Candidate[] = allWords(
-      await fn.getline(denops, minLines, maxLines),
-    ).filter((word) => word != completeStr)
-      .map((word) => ({ word }));
+      await fn.getline(args.denops, minLines, maxLines),
+    ).map((word) => ({ word }));
     return cs;
   }
 
@@ -52,13 +44,6 @@ export class Source extends BaseSource {
     return params as unknown as Record<string, unknown>;
   }
 }
-
-Deno.test("pages", () => {
-  assertEquals(Array.from(splitPages(1, 600, 500)), [[1, 500], [501, 1000]]);
-  assertEquals(Array.from(splitPages(1, 1, 500)), [[1, 500]]);
-  assertEquals(Array.from(splitPages(1, 500, 500)), [[1, 500]]);
-  assertEquals(Array.from(splitPages(1, 501, 500)), [[1, 500], [501, 1000]]);
-});
 
 Deno.test("allWords", () => {
   assertEquals(allWords([]), []);
