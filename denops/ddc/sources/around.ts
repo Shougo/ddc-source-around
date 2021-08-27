@@ -1,12 +1,12 @@
 import {
   BaseSource,
   Candidate,
-} from "https://deno.land/x/ddc_vim@v0.2.1/types.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.3.0/types.ts#^";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.2.1/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.3.0/deps.ts#^";
 
 function allWords(lines: string[]): string[] {
   return lines.flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
