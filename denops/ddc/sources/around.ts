@@ -9,8 +9,10 @@ import {
 } from "https://deno.land/x/ddc_vim@v0.3.0/deps.ts#^";
 
 function allWords(lines: string[]): string[] {
-  return lines.flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
-    .map((match) => match[0]).filter((e, i, self) => self.indexOf(e) === i);
+  const words = lines
+    .flatMap((line) => [...line.matchAll(/[\p{L}\d]+/gu)])
+    .map((match) => match[0]);
+  return Array.from(new Set(words)); // remove duplication
 }
 
 type Params = {
