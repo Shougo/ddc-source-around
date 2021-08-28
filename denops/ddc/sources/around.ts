@@ -10,7 +10,7 @@ import {
 
 function allWords(lines: string[]): string[] {
   const words = lines
-    .flatMap((line) => [...line.matchAll(/[a-zA-Z0-9_]+/g)])
+    .flatMap((line) => [...line.matchAll(/[\p{L}\d]+/gu)])
     .map((match) => match[0]);
   return Array.from(new Set(words)); // remove duplication
 }
