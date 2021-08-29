@@ -1,6 +1,7 @@
 import {
   BaseSource,
   Candidate,
+  DdcOptions,
 } from "https://deno.land/x/ddc_vim@v0.3.0/types.ts#^";
 import {
   assertEquals,
@@ -8,9 +9,9 @@ import {
   fn,
 } from "https://deno.land/x/ddc_vim@v0.3.0/deps.ts#^";
 
-function allWords(lines: string[]): string[] {
+function allWords(lines: string[], pattern: string): string[] {
   const words = lines
-    .flatMap((line) => [...line.matchAll(/[\p{L}\d]+/gu)])
+    .flatMap((line) => [...line.matchAll(new RegExp(pattern, 'gu'))])
     .map((match) => match[0]);
   return Array.from(new Set(words)); // remove duplication
 }
@@ -22,6 +23,7 @@ type Params = {
 export class Source extends BaseSource {
   async gatherCandidates(args: {
     denops: Denops,
+    options: DdcOptions,
     sourceParams: Record<string, unknown>,
     completeStr: string,
   }): Promise<Candidate[]> {
@@ -35,6 +37,7 @@ export class Source extends BaseSource {
     );
     const cs: Candidate[] = allWords(
       await fn.getline(args.denops, minLines, maxLines),
+      args.options.keywordPattern,
     ).map((word) => ({ word }));
     return cs;
   }
@@ -48,9 +51,9 @@ export class Source extends BaseSource {
 }
 
 Deno.test("allWords", () => {
-  assertEquals(allWords([]), []);
-  assertEquals(allWords(["_w2er"]), ["_w2er"]);
-  assertEquals(allWords(["asdf _w2er", "223r wawer"]), [
+  assertEquals(allWords([], "\\w*"), []);
+  assertEquals(allWords(["_w2er"], "[a-zA-Z0-9_]+"), ["_w2er"]);
+  assertEquals(allWords(["asdf _w2er", "223r wawer"], "[a-zA-Z0-9_]+"), [
     "asdf",
     "_w2er",
     "223r",
