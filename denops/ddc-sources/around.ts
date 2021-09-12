@@ -2,12 +2,13 @@ import {
   BaseSource,
   Candidate,
   DdcOptions,
-} from "https://deno.land/x/ddc_vim@v0.3.0/types.ts#^";
+  SourceOptions,
+} from "https://deno.land/x/ddc_vim@v0.5.0/types.ts#^";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.3.0/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.5.0/deps.ts#^";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
@@ -24,6 +25,7 @@ export class Source extends BaseSource {
   async gatherCandidates(args: {
     denops: Denops,
     options: DdcOptions,
+    sourceOptions: SourceOptions,
     sourceParams: Record<string, unknown>,
     completeStr: string,
   }): Promise<Candidate[]> {
