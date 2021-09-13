@@ -26,7 +26,7 @@ call ddc#custom#patch_global('sources', ['around'])
 
 " Change source options
 call ddc#custom#patch_global('sourceOptions', {
-      \ 'around': {'matchers': ['matcher_head'], 'mark': 'A'},
+      \ 'around': {'mark': 'A'},
       \ })
 call ddc#custom#patch_global('sourceParams', {
       \ 'around': {'maxSize': 500},
