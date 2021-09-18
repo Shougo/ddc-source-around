@@ -3,12 +3,12 @@ import {
   Candidate,
   DdcOptions,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.5.0/types.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.9.0/types.ts#^";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.5.0/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.9.0/deps.ts#^";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
@@ -21,7 +21,7 @@ type Params = {
   maxSize: number;
 };
 
-export class Source extends BaseSource {
+export class Source extends BaseSource<Params> {
   async gatherCandidates(args: {
     denops: Denops,
     options: DdcOptions,
@@ -44,11 +44,10 @@ export class Source extends BaseSource {
     return cs;
   }
 
-  params(): Record<string, unknown> {
-    const params: Params = {
+  params(): Params {
+    return {
       maxSize: 200,
     };
-    return params as unknown as Record<string, unknown>;
   }
 }
 
