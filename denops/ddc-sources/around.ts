@@ -3,12 +3,12 @@ import {
   Candidate,
   DdcOptions,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.9.0/types.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.12.0/types.ts#^";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.9.0/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.12.0/deps.ts#^";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
@@ -26,7 +26,7 @@ export class Source extends BaseSource<Params> {
     denops: Denops,
     options: DdcOptions,
     sourceOptions: SourceOptions,
-    sourceParams: Record<string, unknown>,
+    sourceParams: Params,
     completeStr: string,
   }): Promise<Candidate[]> {
     const p = args.sourceParams as unknown as Params;
