@@ -3,12 +3,12 @@ import {
   Candidate,
   DdcOptions,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.13.0/types.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.17.0/types.ts#^";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.13.0/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v0.17.0/deps.ts#^";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
@@ -19,6 +19,7 @@ function allWords(lines: string[], pattern: string): string[] {
 
 type Params = {
   maxSize: number;
+  minKeywordLength: number;
 };
 
 export class Source extends BaseSource<Params> {
@@ -40,13 +41,14 @@ export class Source extends BaseSource<Params> {
     const cs: Candidate[] = allWords(
       await fn.getline(args.denops, minLines, maxLines),
       args.options.keywordPattern,
-    ).map((word) => ({ word }));
+    ).filter((word) => word.length >= p.minKeywordLength).map((word) => ({ word }));
     return cs;
   }
 
   params(): Params {
     return {
       maxSize: 200,
+      minKeywordLength: 3,
     };
   }
 }
