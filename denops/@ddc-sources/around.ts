@@ -19,7 +19,6 @@ function allWords(lines: string[], pattern: string): string[] {
 
 type Params = {
   maxSize: number;
-  minKeywordLength: number;
 };
 
 export class Source extends BaseSource<Params> {
@@ -41,14 +40,13 @@ export class Source extends BaseSource<Params> {
     const cs: Candidate[] = allWords(
       await fn.getline(args.denops, minLines, maxLines),
       args.options.keywordPattern,
-    ).filter((word) => word.length >= p.minKeywordLength).map((word) => ({ word }));
+    ).map((word) => ({ word }));
     return cs;
   }
 
   params(): Params {
     return {
       maxSize: 200,
-      minKeywordLength: 3,
     };
   }
 }
