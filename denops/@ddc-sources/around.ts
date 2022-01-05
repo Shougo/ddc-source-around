@@ -13,6 +13,7 @@ import {
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
     .flatMap((line) => [...line.matchAll(new RegExp(pattern, 'gu'))])
+    .filter((match) => match[0].length > 0)
     .map((match) => match[0]);
   return Array.from(new Set(words)); // remove duplication
 }
