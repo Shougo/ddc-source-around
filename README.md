@@ -2,9 +2,7 @@
 
 Around completion for ddc.vim
 
-This source collects candidates around the cursor, namely inside current
-buffer.
-
+This source collects candidates around the cursor, namely inside current buffer.
 
 ## Required
 
@@ -12,11 +10,9 @@ buffer.
 
 https://github.com/vim-denops/denops.vim
 
-
 ### ddc.vim
 
 https://github.com/Shougo/ddc.vim
-
 
 ## Configuration
 

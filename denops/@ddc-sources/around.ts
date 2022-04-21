@@ -1,18 +1,18 @@
 import {
   BaseSource,
-  Candidate,
   DdcOptions,
+  Item,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v0.17.0/types.ts#^";
+} from "https://deno.land/x/ddc_vim@v2.2.0/types.ts";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v0.17.0/deps.ts#^";
+} from "https://deno.land/x/ddc_vim@v2.2.0/deps.ts";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
-    .flatMap((line) => [...line.matchAll(new RegExp(pattern, 'gu'))])
+    .flatMap((line) => [...line.matchAll(new RegExp(pattern, "gu"))])
     .filter((match) => match[0].length > 0)
     .map((match) => match[0]);
   return Array.from(new Set(words)); // remove duplication
@@ -23,13 +23,13 @@ type Params = {
 };
 
 export class Source extends BaseSource<Params> {
-  async gatherCandidates(args: {
-    denops: Denops,
-    options: DdcOptions,
-    sourceOptions: SourceOptions,
-    sourceParams: Params,
-    completeStr: string,
-  }): Promise<Candidate[]> {
+  async gather(args: {
+    denops: Denops;
+    options: DdcOptions;
+    sourceOptions: SourceOptions;
+    sourceParams: Params;
+    completeStr: string;
+  }): Promise<Item[]> {
     const p = args.sourceParams as unknown as Params;
     const maxSize = p.maxSize;
     const currentLine = await fn.line(args.denops, ".");
@@ -38,7 +38,7 @@ export class Source extends BaseSource<Params> {
       await fn.line(args.denops, "$"),
       currentLine + maxSize,
     );
-    const cs: Candidate[] = allWords(
+    const cs: Item[] = allWords(
       await fn.getline(args.denops, minLines, maxLines),
       args.options.keywordPattern,
     ).map((word) => ({ word }));
