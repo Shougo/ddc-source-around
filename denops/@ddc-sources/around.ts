@@ -3,19 +3,19 @@ import {
   DdcOptions,
   Item,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v2.2.0/types.ts";
+} from "https://deno.land/x/ddc_vim@v2.5.0/types.ts";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v2.2.0/deps.ts";
+} from "https://deno.land/x/ddc_vim@v2.5.0/deps.ts";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
     .flatMap((line) => [...line.matchAll(new RegExp(pattern, "gu"))])
     .filter((match) => match[0].length > 0)
     .map((match) => match[0]);
-  return Array.from(new Set(words)); // remove duplication
+  return Array.from(new Set(words)); // Remove duplication
 }
 
 type Params = {
