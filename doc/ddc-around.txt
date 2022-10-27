@@ -1,25 +1,25 @@
-*ddc-around.txt*	Around completion for ddc.vim
+*ddc-source-around.txt*	Around completion for ddc.vim
 
 Author: Shougo <Shougo.Matsu at gmail.com>
 License: MIT license
 
-CONTENTS						*ddc-around-contents*
+CONTENTS					*ddc-source-around-contents*
 
-Introduction		|ddc-around-introduction|
-Install			|ddc-around-install|
-Examples		|ddc-around-examples|
-Params			|ddc-around-params|
+Introduction		|ddc-source-around-introduction|
+Install			|ddc-source-around-install|
+Examples		|ddc-source-around-examples|
+Params			|ddc-source-around-params|
 
 
 ==============================================================================
-INTRODUCTION					*ddc-around-introduction*
+INTRODUCTION				*ddc-source-around-introduction*
 
 This source collects candidates around the cursor, namely inside current
 buffer.
 
 
 ==============================================================================
-INSTALL							*ddc-around-install*
+INSTALL						*ddc-source-around-install*
 
 Please install both "ddc.vim" and "denops.vim".
 
@@ -28,7 +28,7 @@ https://github.com/vim-denops/denops.vim
 
 
 ==============================================================================
-EXAMPLES						*ddc-around-examples*
+EXAMPLES					*ddc-source-around-examples*
 >
 >
 	" Use around source.
@@ -44,9 +44,9 @@ EXAMPLES						*ddc-around-examples*
 <
 
 ==============================================================================
-PARAMS							*ddc-around-params*
+PARAMS						*ddc-source-around-params*
 
-				    		*ddc-around-param-maxSize*
+			    		*ddc-source-around-param-maxSize*
 maxSize		(number)
 		Fixed range of looking for words lines above and below your
 		cursor position.
