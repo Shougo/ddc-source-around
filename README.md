@@ -18,14 +18,12 @@ https://github.com/Shougo/ddc.vim
 ## Configuration
 
 ```vim
-" Use around source.
 call ddc#custom#patch_global('sources', ['around'])
 
-" Change source options
-call ddc#custom#patch_global('sourceOptions', {
-      \ 'around': {'mark': 'A'},
+call ddc#custom#patch_global('sourceOptions', #{
+      \   around: #{ mark: 'A' },
       \ })
-call ddc#custom#patch_global('sourceParams', {
-      \ 'around': {'maxSize': 500},
+call ddc#custom#patch_global('sourceParams', #{
+      \   around: #{ maxSize: 500 },
       \ })
 ```
