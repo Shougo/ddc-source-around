@@ -23,7 +23,7 @@ type Params = {
 };
 
 export class Source extends BaseSource<Params> {
-  async gather(args: {
+  override async gather(args: {
     denops: Denops;
     options: DdcOptions;
     sourceOptions: SourceOptions;
@@ -45,7 +45,7 @@ export class Source extends BaseSource<Params> {
     return cs;
   }
 
-  params(): Params {
+  override params(): Params {
     return {
       maxSize: 200,
     };
