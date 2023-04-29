@@ -2,7 +2,7 @@
 
 Around completion for ddc.vim
 
-This source collects candidates around the cursor, namely inside current
+This source collects items around the cursor, namely inside current
 buffer.
 
 ## Required

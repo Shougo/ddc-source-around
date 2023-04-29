@@ -14,7 +14,7 @@ Params			|ddc-source-around-params|
 ==============================================================================
 INTRODUCTION				*ddc-source-around-introduction*
 
-This source collects candidates around the cursor, namely inside current
+This source collects items around the cursor, namely inside current
 buffer.
 
 
