@@ -30,7 +30,6 @@ https://github.com/vim-denops/denops.vim
 ==============================================================================
 EXAMPLES					*ddc-source-around-examples*
 >
->
 	call ddc#custom#patch_global('sources', ['around'])
 	
 	call ddc#custom#patch_global('sourceOptions', #{
