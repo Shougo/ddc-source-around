@@ -3,12 +3,14 @@ import {
   DdcOptions,
   Item,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v3.4.0/types.ts";
+} from "https://deno.land/x/ddc_vim@v3.7.0/types.ts";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v3.4.0/deps.ts";
+  op,
+} from "https://deno.land/x/ddc_vim@v3.7.0/deps.ts";
+import { vimoption2ts } from "https://deno.land/x/ddc_vim@v3.7.0/util.ts";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
@@ -38,9 +40,17 @@ export class Source extends BaseSource<Params> {
       await fn.line(args.denops, "$"),
       currentLine + maxSize,
     );
+
+    // Convert keywordPattern
+    const iskeyword = await op.iskeyword.getLocal(args.denops);
+    const keywordPattern = args.sourceOptions.keywordPattern.replaceAll(
+      /\\k/g,
+      () => "[" + vimoption2ts(iskeyword) + "]",
+    );
+
     const cs: Item[] = allWords(
       await fn.getline(args.denops, minLines, maxLines),
-      args.options.keywordPattern,
+      keywordPattern,
     ).map((word) => ({ word }));
     return cs;
   }
