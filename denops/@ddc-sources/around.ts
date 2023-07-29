@@ -3,14 +3,14 @@ import {
   DdcOptions,
   Item,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v3.7.0/types.ts";
+} from "https://deno.land/x/ddc_vim@v3.9.1/types.ts";
 import {
   assertEquals,
   Denops,
   fn,
   op,
-} from "https://deno.land/x/ddc_vim@v3.7.0/deps.ts";
-import { vimoption2ts } from "https://deno.land/x/ddc_vim@v3.7.0/util.ts";
+} from "https://deno.land/x/ddc_vim@v3.9.1/deps.ts";
+import { vimoption2ts } from "https://deno.land/x/ddc_vim@v3.9.1/util.ts";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
