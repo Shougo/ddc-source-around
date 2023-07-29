@@ -8,9 +8,8 @@ import {
   assertEquals,
   Denops,
   fn,
-  op,
 } from "https://deno.land/x/ddc_vim@v3.9.1/deps.ts";
-import { vimoption2ts } from "https://deno.land/x/ddc_vim@v3.9.1/util.ts";
+import { convertKeywordPattern } from "https://deno.land/x/ddc_vim@v3.9.1/util.ts";
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
@@ -42,10 +41,9 @@ export class Source extends BaseSource<Params> {
     );
 
     // Convert keywordPattern
-    const iskeyword = await op.iskeyword.getLocal(args.denops);
-    const keywordPattern = args.sourceOptions.keywordPattern.replaceAll(
-      /\\k/g,
-      () => "[" + vimoption2ts(iskeyword) + "]",
+    const keywordPattern = await convertKeywordPattern(
+      args.denops,
+      args.sourceOptions.keywordPattern,
     );
 
     const cs: Item[] = allWords(
