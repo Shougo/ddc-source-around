@@ -15,7 +15,7 @@ const COLUMNS_MAX = 150;
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
-    .filter((line) => line.length > COLUMNS_MAX)
+    .filter((line) => line.length < COLUMNS_MAX)
     .flatMap((line) => [...line.matchAll(new RegExp(pattern, "gu"))])
     .filter((match) => match[0].length > 0)
     .map((match) => match[0]);
