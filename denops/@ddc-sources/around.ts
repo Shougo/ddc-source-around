@@ -3,16 +3,19 @@ import {
   DdcOptions,
   Item,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v4.1.0/types.ts";
+} from "https://deno.land/x/ddc_vim@v4.3.1/types.ts";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v4.1.0/deps.ts";
-import { convertKeywordPattern } from "https://deno.land/x/ddc_vim@v4.1.0/util.ts";
+} from "https://deno.land/x/ddc_vim@v4.3.1/deps.ts";
+import { convertKeywordPattern } from "https://deno.land/x/ddc_vim@v4.3.1/utils.ts";
+
+const COLUMNS_MAX = 150;
 
 function allWords(lines: string[], pattern: string): string[] {
   const words = lines
+    .filter((line) => line.length > COLUMNS_MAX)
     .flatMap((line) => [...line.matchAll(new RegExp(pattern, "gu"))])
     .filter((match) => match[0].length > 0)
     .map((match) => match[0]);
