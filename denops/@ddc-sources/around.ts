@@ -3,13 +3,13 @@ import {
   DdcOptions,
   Item,
   SourceOptions,
-} from "https://deno.land/x/ddc_vim@v4.3.1/types.ts";
+} from "https://deno.land/x/ddc_vim@v5.0.1/types.ts";
 import {
   assertEquals,
   Denops,
   fn,
-} from "https://deno.land/x/ddc_vim@v4.3.1/deps.ts";
-import { convertKeywordPattern } from "https://deno.land/x/ddc_vim@v4.3.1/utils.ts";
+} from "https://deno.land/x/ddc_vim@v5.0.1/deps.ts";
+import { convertKeywordPattern } from "https://deno.land/x/ddc_vim@v5.0.1/utils.ts";
 
 const COLUMNS_MAX = 200;
 
