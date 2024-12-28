@@ -3,7 +3,7 @@
 Author: Shougo <Shougo.Matsu at gmail.com>
 License: MIT license
 
-CONTENTS					*ddc-source-around-contents*
+CONTENTS                                          *ddc-source-around-contents*
 
 Introduction		|ddc-source-around-introduction|
 Install			|ddc-source-around-install|
@@ -12,14 +12,13 @@ Params			|ddc-source-around-params|
 
 
 ==============================================================================
-INTRODUCTION				*ddc-source-around-introduction*
+INTRODUCTION                                  *ddc-source-around-introduction*
 
-This source collects items around the cursor, namely inside current
-buffer.
+This source collects items around the cursor, namely inside current buffer.
 
 
 ==============================================================================
-INSTALL						*ddc-source-around-install*
+INSTALL                                            *ddc-source-around-install*
 
 Please install both "ddc.vim" and "denops.vim".
 
@@ -28,8 +27,8 @@ https://github.com/vim-denops/denops.vim
 
 
 ==============================================================================
-EXAMPLES					*ddc-source-around-examples*
->
+EXAMPLES                                          *ddc-source-around-examples*
+>vim
 	call ddc#custom#patch_global('sources', ['around'])
 	
 	call ddc#custom#patch_global('sourceOptions', #{
@@ -41,14 +40,20 @@ EXAMPLES					*ddc-source-around-examples*
 <
 
 ==============================================================================
-PARAMS						*ddc-source-around-params*
+PARAMS                                              *ddc-source-around-params*
 
-			    		*ddc-source-around-param-maxSize*
+                                             *ddc-source-around-param-maxSize*
 maxSize		(number)
 		Fixed range of looking for words lines above and below your
 		cursor position.
 
 		Default: 200
+
+                                           *ddc-source-around-param-minLength*
+minLength	(number)
+		Minimum length of looking for words.
+
+		Default: 2
 
 
 ==============================================================================
