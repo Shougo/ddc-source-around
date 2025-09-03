@@ -1,15 +1,11 @@
-import {
-  type DdcOptions,
-  type Item,
-  type SourceOptions,
-} from "jsr:@shougo/ddc-vim@~9.1.0/types";
-import { BaseSource } from "jsr:@shougo/ddc-vim@~9.1.0/source";
-import { convertKeywordPattern } from "jsr:@shougo/ddc-vim@~9.1.0/utils";
+import type { DdcOptions, Item, SourceOptions } from "@shougo/ddc-vim/types";
+import { BaseSource } from "@shougo/ddc-vim/source";
+import { convertKeywordPattern } from "@shougo/ddc-vim/utils";
 
-import type { Denops } from "jsr:@denops/core@~7.0.0";
-import * as fn from "jsr:@denops/std@~7.4.0/function";
+import type { Denops } from "@denops/std";
+import * as fn from "@denops/std/function";
 
-import { assertEquals } from "jsr:@std/assert@~1.0.3/equals";
+import { assertEquals } from "@std/assert/equals";
 
 const COLUMNS_MAX = 200;
 
