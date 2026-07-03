@@ -75,3 +75,62 @@ Deno.test("allWords", () => {
     "wawer",
   ]);
 });
+
+Deno.test("allWords: deduplicate and keep first-seen order", () => {
+  assertEquals(
+    allWords(
+      ["foo bar foo", "bar baz foo"],
+      "[a-zA-Z0-9_]+",
+      1,
+    ),
+    ["foo", "bar", "baz"],
+  );
+});
+
+Deno.test("allWords: minLength boundary", () => {
+  assertEquals(
+    allWords(
+      ["a ab abc abcd"],
+      "[a-zA-Z0-9_]+",
+      3,
+    ),
+    ["abc", "abcd"],
+  );
+});
+
+Deno.test("allWords: skips too long lines (>= COLUMNS_MAX)", () => {
+  const okLine = "a".repeat(COLUMNS_MAX - 1); // 199
+  const ngLine = "b".repeat(COLUMNS_MAX); // 200 (skip)
+
+  assertEquals(
+    allWords(
+      [okLine, ngLine],
+      "[a-zA-Z]+",
+      1,
+    ),
+    [okLine],
+  );
+});
+
+Deno.test("allWords: empty matches are removed by minLength filter", () => {
+  // \\w* can match empty, but minLength=1 removes them.
+  assertEquals(
+    allWords(
+      ["..."],
+      "\\w*",
+      1,
+    ),
+    [],
+  );
+});
+
+Deno.test("allWords: unicode words with /u flag", () => {
+  assertEquals(
+    allWords(
+      ["あいう abc １２３"],
+      "\\p{L}+",
+      1,
+    ),
+    ["あいう", "abc"],
+  );
+});
